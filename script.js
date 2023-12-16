@@ -24,8 +24,13 @@
     // つぶやくダイアログが非表示で`n`を押したとき、つぶやくダイアログを表示する
     window.addEventListener('keypress', (e) => {
         const taiitsuDialog = document.getElementById("taiitsuDialog");
+        // つぶやくダイアログが表示中は何もしない
         if (taiitsuDialog.style.display !== 'none') return;
+        // 入力キーがn以外なら何もしない
         if (e.key !== 'n') return;
+        // テキスト入力中なら何もしない
+        const $focused = $('input[type=text]:focus, textarea:focus');
+        if ($focused.length > 0) return;
 
         Taittsuu.Post.showTaiitsuDialog();
         const taiitsuInput = document.getElementById("taiitsuInput");
